@@ -1,7 +1,18 @@
 package com.example.not;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -29,8 +40,13 @@ public class MainActivity extends Activity {
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
-    String SENDER_ID = "1035852633612";
+    String SENDER_ID = "SENDER_ID";
 
+    /**
+     * 
+     */
+    String URL = "MY_SERVER_URL";
+    
     /**
      * Tag used on log messages.
      */
@@ -196,5 +212,32 @@ public class MainActivity extends Activity {
 	 */
 	private void sendRegistrationIdToBackend() {
 	    // Your implementation here.
+	    // Create a new HttpClient and Post Header
+	    HttpClient httpclient = new DefaultHttpClient();
+	    HttpPost httppost = new HttpPost();
+
+	    try {
+	    	
+	    	String email;
+	    	
+	    	email = UserInfo.getEmail(context);
+	        // Add your data
+	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	        nameValuePairs.add(new BasicNameValuePair("email", email));
+	        nameValuePairs.add(new BasicNameValuePair("city", "MEX"));
+	        nameValuePairs.add(new BasicNameValuePair("token", this.regid));
+	        nameValuePairs.add(new BasicNameValuePair("device", "android"));
+
+	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+	        // Execute HTTP Post Request
+	        HttpResponse response = httpclient.execute(httppost);
+
+	    } catch (ClientProtocolException e) {
+	        // TODO Auto-generated catch block
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	    }
+		
 	}
 }
