@@ -43,7 +43,8 @@ public class MainActivity extends Activity {
     String SENDER_ID = "SENDER_ID";
 
     /**
-     * 
+     * Substitute you own URL SERVER. In your server you can save the register id to
+     * send notification via GCM
      */
     String URL = "MY_SERVER_URL";
     
