@@ -37,3 +37,10 @@ If this request is successful then your request must has code 200
             }
         ]
     }
+    
+    
+## Usage
+
+You need set the SENDER_ID and URL_SERVER and customize sendRegistrationIdToBackend()  in MainActivity.java
+
+
