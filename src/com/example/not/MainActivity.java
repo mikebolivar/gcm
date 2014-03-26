@@ -215,7 +215,7 @@ public class MainActivity extends Activity {
 	    // Your implementation here.
 	    // Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost();
+	    HttpPost httppost = new HttpPost(this.URL);
 
 	    try {
 	    	
